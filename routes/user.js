@@ -1,5 +1,6 @@
 const express = require('express');
 const Router = express.Router;
+const { userModel } = require('../db');
 
 // const { Router } = require('express'); // Both Are the Same
 

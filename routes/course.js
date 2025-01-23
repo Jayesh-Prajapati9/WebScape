@@ -1,6 +1,8 @@
 const express = require('express');
 const Router = express.Router;
 
+const { courseModel } = require('../db'); 
+
 // const { Router } = require('express'); // Both Are the Same
 
 const courseRouter = Router();
