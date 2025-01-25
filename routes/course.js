@@ -8,15 +8,26 @@ const { courseModel } = require('../db');
 const courseRouter = Router();
 
 
-courseRouter.get('/courses', (req, res) => {
+courseRouter.get('/courses', async (req, res) => {
+    const userId = req.userId;
+    const courseId = req.body.courseId;
+
+    // should check that the user has actually paid the price
+    await purchaseModel.create({
+        userId,
+        courseId
+    })
+
     res.json({
-        message: "All courses end point"
+        message: "You have successfully bought the course"
     })
 })
 
-courseRouter.post('/purchase', (req, res) => {
+courseRouter.post('/purchase', async (req, res) => {
+    const courses = await courseModel.find({});
+
     res.json({
-        message: "Course purchase end point"
+        courses
     })
 })
 
