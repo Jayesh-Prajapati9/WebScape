@@ -5,10 +5,10 @@ const { z } = require('zod');
 const bcrypt = require('bcrypt');
 const auth = require('../auth');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'JWTSECRET';
+const  { JWT_ADMIN_PASSWORD } = require("../config");
 
 
-
+mongoose.connect("mongodb://localhost:27017/WebScape");
 
 const adminRouter = Router();
 
@@ -60,7 +60,7 @@ adminRouter.post('/signup', async (req, res) => {
 adminRouter.post('/signin', async (req, res) => {
 
     const email = req.body.email;
-    const pssword = req.body.password;
+    const password = req.body.password;
 
     const admin = adminModel.findOne({
         email: email
@@ -81,7 +81,7 @@ adminRouter.post('/signin', async (req, res) => {
         })
         return
     }
-    const token = jwt.sign(email, JWT_SECRET);
+    const token = jwt.sign(email, JWT_ADMIN_PASSWORD);
     res.json({
         massage: "Signin successfully",
         token: token
