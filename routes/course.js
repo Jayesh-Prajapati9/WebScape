@@ -6,7 +6,7 @@ const { courseModel } = require('../db');
 // const { Router } = require('express'); // Both Are the Same
 
 const courseRouter = Router();
-
+mongoose.connect("mongodb://localhost:27017/WebScape");
 
 courseRouter.get('/courses', async (req, res) => {
     const userId = req.userId;
